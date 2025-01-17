@@ -1,0 +1,1864 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\title{Вопросы к экзамену по Java База}
+\author{Samuel Burns}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Язык программирования Java. Общая характеристика}
+Java — это объектно-ориентированный язык программирования, разработанный компанией Sun Microsystems (ныне принадлежащей Oracle Corporation). Он был впервые представлен в 1995 году.
+\subsection*{Основные характеристики Java}
+\begin{itemize}
+    \item \textbf{Платформенная независимость}. Программы, написанные на Java, компилируются в байт-код, который выполняется на виртуальной машине Java (JVM). Это позволяет запускать Java-приложения на любой платформе, поддерживающей JVM, без необходимости перекомпиляции кода.
+    \item Java является \textbf{строго объектно-ориентированным} языком программирования. Все данные и функции в Java организованы в виде объектов и классов. 
+    \item Java предоставляет \textbf{автоматическое управление памятью }с помощью сборщика мусора (Garbage Collector). 
+    \item Java поддерживает\textbf{ многопоточность на уровне языка}.
+\end{itemize}
+
+
+\section{Консольный ввод и вывод (классы, методы, особенности)}
+В Java консольный ввод и вывод осуществляется с помощью классов \textbf{System}, \textbf{Scanner} и \textbf{PrintStream}. 
+
+\subsection*{Консольный вывод}
+Для вывода данных в консоль используется класс System и его статическое поле out, которое является экземпляром класса PrintStream.
+\begin{verbatim}[]
+public class Main {
+    public static void main(String[] args) {
+        System.out.print("Hello, ");
+        System.out.println("World!");
+        System.out.printf("Formatted output: %d %s\n", 42, "answer");
+    }
+}
+\end{verbatim}
+
+\subsection*{Консольный ввод}
+Для ввода данных из консоли используется класс Scanner, который находится в пакете java.util. Основные методы для ввода данных:
+\begin{itemize}
+    \item nextInt(): Считывает целое число.
+    \item nextDouble(): Считывает число с плавающей точкой.
+    \item nextLine(): Считывает строку.
+    \item next(): Считывает слово (до пробела).
+\end{itemize}
+
+\subsection*{Особенности}
+\begin{itemize}
+    \item Буферизация ввода: Методы nextInt(), nextDouble() и другие не потребляют символ новой строки, оставленный после ввода. Поэтому перед использованием nextLine() после этих методов рекомендуется вызвать scanner.nextLine() для потребления этого символа.
+    \item Закрытие Scanner: После завершения работы с Scanner рекомендуется закрыть его с помощью метода close(), чтобы освободить ресурсы.
+    \item Форматированный вывод: Метод printf позволяет использовать форматирование, аналогичное форматированию в языке C.
+\end{itemize}
+
+\section{Примитивные типы данных}
+\begin{itemize}
+    \item \texttt{byte}: 8-битный целочисленный тип, диапазон значений от $-128$ до $127$.
+    \item \texttt{short}: 16-битный целочисленный тип, диапазон значений от $-32,768$ до $32,767$.
+    \item \texttt{int}: 32-битный целочисленный тип, диапазон значений от $-2^{16}$ до $2^{16}$.
+    \item \texttt{long}: 64-битный целочисленный тип, диапазон значений от $-2^{32}$ до $2^{32}$.
+
+    \item \texttt{float}: 32-битный тип с плавающей точкой, диапазон значений примерно от $1.4 \times 10^{-45}$ до $3.4 \times 10^{38}$.
+    \item \texttt{double}: 64-битный тип с плавающей точкой, диапазон значений примерно от $4.9 \times 10^{-324}$ до $1.7 \times 10^{308}$.
+
+    \item \texttt{char}: 16-битный символьный тип, представляет одиночный символ в кодировке Unicode, диапазон значений от $0$ до $65,535$.
+
+    \item \texttt{boolean}: представляет логическое значение и может принимать одно из двух значений: \texttt{true} или \texttt{false}.
+\end{itemize}
+
+
+\section{Числовые типы данных, операции над ними}
+\begin{itemize}
+    \item \texttt{byte}: 8-битный целочисленный тип, диапазон значений от $-128$ до $127$.
+    \item \texttt{short}: 16-битный целочисленный тип, диапазон значений от $-32,768$ до $32,767$.
+    \item \texttt{int}: 32-битный целочисленный тип, диапазон значений от $-2^{16}$ до $2^{16}$.
+    \item \texttt{long}: 64-битный целочисленный тип, диапазон значений от $-2^{32}$ до $2^{32}$.
+
+    \item \texttt{float}: 32-битный тип с плавающей точкой, диапазон значений примерно от $1.4 \times 10^{-45}$ до $3.4 \times 10^{38}$.
+    \item \texttt{double}: 64-битный тип с плавающей точкой, диапазон значений примерно от $4.9 \times 10^{-324}$ до $1.7 \times 10^{308}$.
+\end{itemize}
+
+\subsection*{Операции над числовыми типами данных}
+\textbf{Арифметические операции}
+\begin{itemize}
+    \item Сложение (+)
+    \item Вычитание (-)
+    \item Умножение (*)
+    \item Деление (/)
+    \item Остаток от деления (\%)
+\end{itemize}
+
+\textbf{Инкремент и декремент}
+\begin{itemize}
+    \item Инкремент (++)
+    \item Декремент (==)
+\end{itemize}
+
+\textbf{Операции сравнения}
+\begin{itemize}
+    \item Равно (&==&)
+    \item Не равно (!=)
+    \item Меньше (<)
+    \item Больше (>)
+    \item Меньше или равно (<=)
+    \item Больше или равно (>=)
+\end{itemize}
+
+\section{Логический тип данных, операции над ним}
+\texttt{boolean}: представляет логическое значение и может принимать одно из двух значений: \texttt{true} или \texttt{false}.
+
+\textbf{Логические операции}
+\begin{itemize}
+    \item Логическое И (\&\&)
+    \item Логическое ИЛИ (||)
+    \item Логическое НЕ (!)
+\end{itemize}
+
+
+\section{Строковой и символьный типы данных, операции над ними}
+\texttt{char}: 16-битный символьный тип, представляет одиночный символ в кодировке Unicode, диапазон значений от $0$ до $65,535$.
+
+\texttt{String}: Представляет последовательность символов. Ссылочный тип данных.
+
+\subsection*{Операции над символьными типами данных}
+
+\begin{itemize}
+    \item \textbf{Сравнение символов}:
+    \begin{itemize}
+        \item Равно: \texttt{char c1 = 'A'; char c2 = 'A'; boolean isEqual = (c1 == c2);}
+        \item Не равно: \texttt{boolean isNotEqual = (c1 != c2);}
+        \item Меньше: \texttt{boolean isLess = (c1 < c2);}
+        \item Больше: \texttt{boolean isGreater = (c1 > c2);}
+        \item Меньше или равно: \texttt{boolean isLessOrEqual = (c1 <= c2);}
+        \item Больше или равно: \texttt{boolean isGreaterOrEqual = (c1 >= c2);}
+    \end{itemize}
+\end{itemize}
+
+
+\section{Класс String. Особенности реализации. Неизменяемость строк}
+
+В Java строки являются неизменяемыми (immutable). Это означает, что после создания объекта String его содержимое не может быть изменено. Любая операция, которая, кажется, изменяет строку, на самом деле создает новый объект String.
+
+\subsection*{Операции над строковыми типами данных}
+
+\begin{itemize}
+    \item \textbf{Создание строк}:
+    \begin{itemize}
+        \item Литералы строк: \texttt{String greeting = "Hello";}
+        \item Конструкторы класса String: \texttt{String str = new String("Hello");}
+    \end{itemize}
+
+    \item \textbf{Конкатенация строк}:
+    \begin{itemize}
+        \item Оператор \texttt{+}: \texttt{String result = "Hello" + " World";}
+        \item Метод \texttt{concat}: \texttt{String result = "Hello".concat(" World");}
+    \end{itemize}
+
+    \item \textbf{Сравнение строк}:
+    \begin{itemize}
+        \item Метод \texttt{equals}: \texttt{boolean isEqual = "Hello".equals("Hello");}
+        \item Метод \texttt{equalsIgnoreCase}: \texttt{boolean isEqualIgnoreCase = "Hello".equalsIgnoreCase("hello");}
+        \item Метод \texttt{compareTo}: \texttt{int comparison = "Hello".compareTo("World");}
+    \end{itemize}
+
+    \item \textbf{Получение длины строки}:
+    \begin{itemize}
+        \item Метод \texttt{length}: \texttt{int length = "Hello".length();}
+    \end{itemize}
+
+    \item \textbf{Получение символов из строки}:
+    \begin{itemize}
+        \item Метод \texttt{charAt}: \texttt{char firstChar = "Hello".charAt(0);}
+    \end{itemize}
+
+    \item \textbf{Получение подстроки}:
+    \begin{itemize}
+        \item Метод \texttt{substring}: \texttt{String substring = "Hello".substring(1, 4);}
+    \end{itemize}
+
+    \item \textbf{Преобразование строки}:
+    \begin{itemize}
+        \item Метод \texttt{toUpperCase}: \texttt{String upperCase = "Hello".toUpperCase();}
+        \item Метод \texttt{toLowerCase}: \texttt{String lowerCase = "Hello".toLowerCase();}
+    \end{itemize}
+
+    \item \textbf{Поиск в строке}:
+    \begin{itemize}
+        \item Метод \texttt{indexOf}: \texttt{int index = "Hello".indexOf('e');}
+        \item Метод \texttt{lastIndexOf}: \texttt{int lastIndex = "Hello".lastIndexOf('l');}
+    \end{itemize}
+
+    \item \textbf{Замена в строке}:
+    \begin{itemize}
+        \item Метод \texttt{replace}: \texttt{String replaced = "Hello".replace('e', 'a');}
+    \end{itemize}
+\end{itemize}
+
+
+\section{Условный оператор. Варианты синтаксиса}
+\subsection*{Синтаксис условного оператора}
+
+\subsubsection*{Простой \texttt{if}}
+
+\begin{verbatim}
+if (условие) {
+    // код, который выполняется, если условие истинно
+}
+\end{verbatim}
+
+\subsubsection*{Оператор \texttt{if-else}}
+
+\begin{verbatim}
+if (условие) {
+    // код, который выполняется, если условие истинно
+} else {
+    // код, который выполняется, если условие ложно
+}
+\end{verbatim}
+
+\subsubsection*{Оператор \texttt{if-else if-else}}
+
+\begin{verbatim}
+if (условие1) {
+    // код, который выполняется, если условие1 истинно
+} else if (условие2) {
+    // код, который выполняется, если условие2 истинно
+} else {
+    // код, который выполняется, если ни одно из условий не истинно
+}
+\end{verbatim}
+
+\subsection*{Примеры использования}
+
+\subsubsection*{Простой \texttt{if}}
+
+\begin{verbatim}
+int x = 10;
+if (x > 5) {
+    System.out.println("x больше 5");
+}
+\end{verbatim}
+
+\subsubsection*{Оператор \texttt{if-else}}
+
+\begin{verbatim}
+int y = 3;
+if (y > 5) {
+    System.out.println("y больше 5");
+} else {
+    System.out.println("y меньше или равно 5");
+}
+\end{verbatim}
+
+\subsubsection*{Оператор \texttt{if-else if-else}}
+
+\begin{verbatim}
+int z = 7;
+if (z > 10) {
+    System.out.println("z больше 10");
+} else if (z > 5) {
+    System.out.println("z больше 5, но меньше или равно 10");
+} else {
+    System.out.println("z меньше или равно 5");
+}
+\end{verbatim}
+
+
+\section{Цикл for. Синтаксис, особенности, применение}
+\subsection*{Синтаксис цикла \texttt{for}}
+
+\begin{verbatim}
+for (инициализация; условие; обновление) {
+    // код, который выполняется на каждой итерации
+}
+\end{verbatim}
+
+\begin{itemize}
+    \item \textbf{Инициализация}: Выполняется один раз перед началом цикла. Обычно используется для инициализации счетчика.
+    \item \textbf{Условие}: Проверяется перед каждой итерацией. Если условие истинно, выполняется тело цикла. Если ложно, цикл завершается.
+    \item \textbf{Обновление}: Выполняется после каждой итерации. Обычно используется для обновления счетчика.
+\end{itemize}
+
+\subsection*{Примеры использования}
+
+\subsubsection*{Простой цикл \texttt{for}}
+
+\begin{verbatim}
+for (int i = 0; i < 5; i++) {
+    System.out.println("Итерация: " + i);
+}
+\end{verbatim}
+
+\subsubsection*{Цикл \texttt{for} с использованием массива}
+
+\begin{verbatim}
+int[] numbers = {1, 2, 3, 4, 5};
+for (int i = 0; i < numbers.length; i++) {
+    System.out.println("Элемент: " + numbers[i]);
+}
+\end{verbatim}
+
+\subsubsection*{Цикл \texttt{for} с использованием улучшенного синтаксиса (enhanced for loop)}
+
+\begin{verbatim}
+int[] numbers = {1, 2, 3, 4, 5};
+for (int number : numbers) {
+    System.out.println("Элемент: " + number);
+}
+\end{verbatim}
+
+\subsection*{Особенности цикла \texttt{for}}
+
+\begin{itemize}
+    \item \textbf{Многократная инициализация}: Можно инициализировать несколько переменных.
+    \begin{verbatim}
+    for (int i = 0, j = 10; i < 5; i++, j--) {
+        System.out.println("i: " + i + ", j: " + j);
+    }
+    \end{verbatim}
+
+    \item \textbf{Пустая инициализация, условие или обновление}: Любая из частей цикла \texttt{for} может быть опущена.
+    \begin{verbatim}
+    int i = 0;
+    for (; i < 5;) {
+        System.out.println("Итерация: " + i);
+        i++;
+    }
+    \end{verbatim}
+
+    \item \textbf{Бесконечный цикл}: Можно создать бесконечный цикл, опустив условие.
+    \begin{verbatim}
+    for (;;) {
+        System.out.println("Бесконечный цикл");
+        // Для выхода из цикла можно использовать break
+        break;
+    }
+    \end{verbatim}
+\end{itemize}
+
+
+\section{Цикл while. Синтаксис, особенности, применение}
+Цикл \texttt{while} используется для повторения блока кода до тех пор, пока условие истинно. Он проверяет условие \textbf{перед} каждой итерацией и выполняет тело цикла, если условие истинно.
+
+\subsection*{Синтаксис цикла \texttt{while}}
+
+\begin{verbatim}
+while (условие) {
+    // код, который выполняется на каждой итерации
+}
+\end{verbatim}
+
+\begin{itemize}
+    \item \textbf{Условие}: Проверяется перед каждой итерацией. Если условие истинно, выполняется тело цикла. Если ложно, цикл завершается.
+\end{itemize}
+
+
+\section{Массивы. Объявление, операции над массивом, особенности реализации, применение}
+Массивы в Java представляют собой структуры данных, которые хранят \textbf{фиксированное} количество элементов одного типа. 
+
+\subsubsection*{Объявление и инициализация массива}
+\begin{verbatim}
+int[] numbers = new int[5]; // Массив из 5 элементов типа int
+\end{verbatim}
+
+\subsubsection*{Инициализация массива с элементами}
+\begin{verbatim}
+int[] numbers = {1, 2, 3, 4, 5}; // Массив с элементами 1, 2, 3, 4, 5
+\end{verbatim}
+
+\subsection*{Операции над массивами}
+\subsubsection*{Доступ к элементам массива}
+\begin{verbatim}
+int[] numbers = {1, 2, 3, 4, 5};
+int firstElement = numbers[0]; // Доступ к первому элементу
+int lastElement = numbers[numbers.length - 1]; // Доступ к последнему элементу
+\end{verbatim}
+
+\subsubsection*{Изменение элементов массива}
+\begin{verbatim}
+numbers[0] = 10; // Изменение первого элемента на 10
+\end{verbatim}
+
+\subsubsection*{Итерация по элементам массива}
+\begin{verbatim}
+for (int i = 0; i < numbers.length; i++) {
+    System.out.println("Элемент: " + numbers[i]);
+}
+\end{verbatim}
+
+Или
+
+\begin{verbatim}
+for (int number : numbers) {
+    System.out.println("Элемент: " + number);
+}
+\end{verbatim}
+
+\subsection*{Особенности реализации массивов}
+
+\begin{itemize}
+    \item \textbf{Фиксированный размер}: Размер массива фиксируется при его создании и не может быть изменен.
+    \item \textbf{Типизация}: Все элементы массива должны быть одного типа.
+    \item \textbf{Инициализация по умолчанию}: Элементы массива инициализируются значениями по умолчанию для их типа (например, 0 для \texttt{int}, \texttt{null} для объектов).
+\end{itemize}
+
+
+\section{Массивы. Объявление многомерных массивов и операции над ними}
+\subsubsection*{Объявление и инициализация двумерного массива}
+
+\begin{verbatim}
+int[][] matrix = new int[3][3]; // Двумерный массив 3x3
+\end{verbatim}
+
+\subsubsection*{Инициализация двумерного массива с элементами}
+
+\begin{verbatim}
+int[][] matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+\end{verbatim}
+
+\subsubsection*{Объявление и инициализация трехмерного массива}
+
+\begin{verbatim}
+int[][][] cube = new int[2][2][2]; // Трехмерный массив 2x2x2
+\end{verbatim}
+
+\subsection*{Операции над многомерными массивами}
+\subsubsection*{Доступ к элементам двумерного массива}
+\begin{verbatim}
+int[][] matrix = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+int element = matrix[0][0]; // Доступ к элементу в первой строке и первом столбце
+\end{verbatim}
+
+\subsubsection*{Изменение элементов двумерного массива}
+\begin{verbatim}
+matrix[0][0] = 10; // Изменение элемента в первой строке и первом столбце на 10
+\end{verbatim}
+
+\subsubsection*{Итерация по элементам двумерного массива}
+\begin{verbatim}
+for (int i = 0; i < matrix.length; i++) {
+    for (int j = 0; j < matrix[i].length; j++) {
+        System.out.println("Элемент: " + matrix[i][j]);
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Использование улучшенного цикла \texttt{for} для двумерного массива}
+\begin{verbatim}
+for (int[] row : matrix) {
+    for (int element : row) {
+        System.out.println("Элемент: " + element);
+    }
+}
+\end{verbatim}
+
+
+\section{Массивы. Объявление, операции над массивом. Линейный и бинарный поиск}
+\subsection*{Линейный поиск}
+
+Линейный поиск (или последовательный поиск) — это простой алгоритм поиска, который проверяет каждый элемент массива последовательно до тех пор, пока не найдет искомый элемент или не достигнет конца массива.
+
+\subsubsection*{Алгоритм линейного поиска}
+
+\begin{verbatim}
+public int linearSearch(int[] array, int target) {
+    for (int i = 0; i < array.length; i++) {
+        if (array[i] == target) {
+            return i; // Элемент найден, возвращаем индекс
+        }
+    }
+    return -1; // Элемент не найден
+}
+\end{verbatim}
+
+\subsection*{Бинарный поиск}
+Бинарный поиск — это более эффективный алгоритм поиска, который работает только с отсортированными массивами. Он делит массив пополам и проверяет средний элемент. Если средний элемент равен искомому, поиск завершается. Если искомый элемент меньше среднего, поиск продолжается в левой половине массива, иначе — в правой половине.
+
+\subsubsection*{Алгоритм бинарного поиска}
+\begin{verbatim}
+public int binarySearch(int[] array, int target) {
+    int left = 0;
+    int right = array.length - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (array[mid] == target) {
+            return mid; // Элемент найден, возвращаем индекс
+        }
+        if (array[mid] < target) {
+            left = mid + 1; // Ищем в правой половине
+        } else {
+            right = mid - 1; // Ищем в левой половине
+        }
+    }
+    return -1; // Элемент не найден
+}
+\end{verbatim}
+
+
+\section{Массивы. Объявление, операции над массивом. Передача массив в метод}
+В Java массивы передаются в методы по ссылке. Это означает, что метод получает ссылку на массив, а не его копию. Изменения, внесённые в массив внутри метода, отражаются на оригинальном массиве.
+
+
+\section{Классы. Объявление классов. Конструктор. Неизменяемый класс}
+Классы в Java являются основными строительными блоками для создания объектов. Они определяют структуру и поведение объектов, включая их свойства (поля) и методы.
+
+\subsection*{Объявление классов}
+Класс объявляется с помощью ключевого слова \texttt{class}, за которым следует имя класса и тело класса, заключённое в фигурные скобки.
+\begin{verbatim}
+public class ClassName {
+    // Поля (переменные)
+    private int field1;
+    private String field2;
+
+    // Конструктор
+    public ClassName(int field1, String field2) {
+        this.field1 = field1;
+        this.field2 = field2;
+    }
+
+    // Методы
+    public void display() {
+        System.out.println("Field1: " + field1 + ", Field2: " + field2);
+    }
+}
+\end{verbatim}
+
+\subsection*{Конструктор}
+Конструктор — это специальный метод, который вызывается при создании объекта класса. Он имеет то же имя, что и класс, и не имеет возвращаемого типа. Конструктор используется для инициализации объектов.
+\begin{verbatim}
+public class Person {
+    private String name;
+    private int age;
+
+    // Конструктор
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Метод для отображения информации
+    public void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+\end{verbatim}
+
+\subsection*{Неизменяемый класс}
+Неизменяемый класс — это класс, объекты которого не могут быть изменены после их создания. Для создания неизменяемого класса необходимо:
+\begin{enumerate}
+    \item Сделать все поля приватными и финальными.
+    \item Предоставить публичный конструктор для инициализации всех полей.
+    \item Не предоставлять методов, которые изменяют состояние объекта.
+    \item Предоставить публичные методы для доступа к значениям полей.
+\end{enumerate}
+
+\begin{verbatim}
+public final class ImmutableClass {
+    private final int field1;
+    private final String field2;
+
+    // Конструктор
+    public ImmutableClass(int field1, String field2) {
+        this.field1 = field1;
+        this.field2 = field2;
+    }
+
+    // Методы доступа
+    public int getField1() {
+        return field1;
+    }
+
+    public String getField2() {
+        return field2;
+    }
+}
+\end{verbatim}
+
+\subsection*{Принципы ООП классов в Java}
+\begin{itemize}
+    \item \textbf{Инкапсуляция}: Классы позволяют скрывать внутреннюю реализацию и предоставлять интерфейс для взаимодействия с объектами.
+    \item \textbf{Наследование}: Классы могут наследовать свойства и методы от других классов.
+    \item \textbf{Полиморфизм}: Объекты могут быть использованы в различных контекстах, что даёт гибкость в программировании.
+\end{itemize}
+
+
+\section{Отличие класса и объекта. Создание экземпляров класса. Особенности перегруженных конструкторов}
+\begin{itemize}
+    \item \textbf{Класс} — это шаблон или чертеж для создания объектов. Класс не занимает память для хранения данных, он только описывает, как должны выглядеть объекты.
+    \item \textbf{Объект} — это экземпляр класса. Он представляет собой конкретную реализацию класса и занимает память для хранения данных.
+\end{itemize}
+
+\subsection*{Создание экземпляров класса}
+
+Экземпляры класса создаются с помощью ключевого слова \texttt{new}, которое вызывает конструктор класса.
+
+\subsection*{Особенности перегруженных конструкторов}
+Перегрузка конструкторов позволяет создавать несколько конструкторов в одном классе с разными параметрами.
+
+\begin{verbatim}
+public class Person {
+    private String name;
+    private int age;
+
+    // Конструктор без параметров
+    public Person() {
+        this.name = "Unknown";
+        this.age = 0;
+    }
+
+    // Конструктор с одним параметром
+    public Person(String name) {
+        this.name = name;
+        this.age = 0;
+    }
+
+    // Конструктор с двумя параметрами
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Метод для отображения информации
+    public void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+\end{verbatim}
+
+
+\section{Статические методы. Перегрузка методов. Объявление констант}
+Статические методы принадлежат классу, а не экземпляру класса. Они могут быть вызваны без создания объекта класса.
+
+\subsection*{Перегрузка методов}
+Перегрузка методов (method overloading) позволяет создавать несколько методов с одним и тем же именем, но с разными параметрами. Это полезно для предоставления различных способов выполнения одной и той же операции.
+
+\subsection*{Объявление констант}
+Константы — это переменные, значения которых не могут быть изменены после их инициализации. В Java константы объявляются с помощью ключевого слова \texttt{final}.
+
+\subsection*{Особенности статических методов, перегрузки методов и констант}
+\begin{itemize}
+    \item \textbf{Статические методы}:
+    \begin{itemize}
+        \item Принадлежат классу, а не экземпляру класса.
+        \item Могут быть вызваны без создания объекта класса.
+        \item Часто используются для утилитарных функций и операций, которые не зависят от состояния объекта.
+    \end{itemize}
+
+    \item \textbf{Перегрузка методов}:
+    \begin{itemize}
+        \item Позволяет создавать несколько методов с одним и тем же именем, но с разными параметрами.
+        \item Удобна для предоставления различных способов выполнения одной и той же операции.
+    \end{itemize}
+
+    \item \textbf{Константы}:
+    \begin{itemize}
+        \item Объявляются с помощью ключевого слова \texttt{final}.
+        \item Значения констант не могут быть изменены после их инициализации.
+    \end{itemize}
+\end{itemize}
+
+
+\section{Классы. Объявление классов. Ссылка this}
+\begin{verbatim}
+public class Person {
+    // Поля (переменные)
+    private String name;
+    private int age;
+
+    // Конструктор
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Метод для отображения информации
+    public void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+\end{verbatim}
+
+\subsection*{Использование ссылки \texttt{this}}
+
+Ссылка \texttt{this} используется для ссылки на текущий объект внутри метода или конструктора. Она полезна для разрешения конфликтов имен между полями класса и параметрами методов или конструкторов.
+
+
+\section{Инкапсуляция. Модификаторы доступа. Понятие геттеров и сеттеров}
+Инкапсуляция — это один из ключевых принципов объектно-ориентированного программирования (ООП), который позволяет скрывать внутреннюю реализацию объекта и предоставлять доступ к его данным только через определенные методы. Это помогает защитить данные от некорректного использования и обеспечивает контроль над доступом к данным.
+
+\subsubsection*{Пример инкапсуляции}
+
+\begin{verbatim}
+public class Person {
+    // Приватные поля
+    private String name;
+    private int age;
+
+    // Конструктор
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Геттер для поля name
+    public String getName() {
+        return name;
+    }
+
+    // Сеттер для поля name
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Геттер для поля age
+    public int getAge() {
+        return age;
+    }
+
+    // Сеттер для поля age
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
+        }
+    }
+}
+\end{verbatim}
+
+\subsection*{Модификаторы доступа}
+Модификаторы доступа определяют уровень доступа к членам класса (полям и методам). В Java существует четыре уровня доступа:
+\begin{itemize}
+    \item \textbf{private}: Доступ только внутри класса.
+    \item \textbf{default} (без модификатора): Доступ внутри пакета.
+    \item \textbf{protected}: Доступ внутри пакета и в подклассах.
+    \item \textbf{public}: Доступ отовсюду.
+\end{itemize}
+
+\subsection*{Геттеры и сеттеры}
+Геттеры и сеттеры — это методы, которые предоставляют доступ к приватным полям класса. Геттеры используются для получения значений полей, а сеттеры — для установки значений полей.
+
+
+\section{Наследование. Особенности реализации в Java. Переопределение методов}
+Наследование в Java реализуется с помощью ключевого слова \texttt{extends}.
+
+Переопределение методов (method overriding) позволяет подклассу предоставить специфическую реализацию метода, который уже определен в суперклассе. Это полезно для изменения или расширения поведения метода в подклассе.
+
+
+\section{Наследование. Особенности реализации в Java. Ссылка super}
+Ссылка \texttt{super} в Java используется для обращения к членам суперкласса (базового класса) из подкласса (производного класса). Она позволяет вызывать конструкторы, методы и доступ к полям суперкласса. Это особенно полезно для переопределения методов и конструкторов, а также для доступа к скрытым полям суперкласса.
+
+\begin{verbatim}
+public class Animal {
+    private String name;
+
+    // Конструктор суперкласса
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    // Метод суперкласса
+    public void makeSound() {
+        System.out.println("Some generic animal sound");
+    }
+}
+
+public class Dog extends Animal {
+    // Конструктор подкласса
+    public Dog(String name) {
+        super(name); // Вызов конструктора суперкласса
+    }
+
+    // Переопределение метода
+    @Override
+    public void makeSound() {
+        System.out.println("Bark");
+    }
+}
+\end{verbatim}
+
+
+\section{Полиморфизм. Ссылочный полиморфизм. Объявление массивов ссылочного типа}
+Полиморфизм — это один из ключевых принципов объектно-ориентированного программирования (ООП), который позволяет объектам разных классов быть обработанными через единый интерфейс. В Java полиморфизм достигается с помощью наследования и интерфейсов.
+
+\subsection*{Ссылочный полиморфизм}
+Ссылочный полиморфизм (или полиморфизм времени выполнения) позволяет ссылке суперкласса указывать на объект подкласса. Это означает, что методы подкласса могут быть вызваны через ссылку суперкласса.
+
+\subsection*{Объявление массивов ссылочного типа}
+Массивы ссылочного типа в Java позволяют хранить ссылки на объекты. Это полезно для работы с коллекциями объектов одного типа или его подтипов.
+
+\begin{verbatim}
+public class Animal {
+    public void makeSound() {
+        System.out.println("Some generic animal sound");
+    }
+}
+
+public class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Bark");
+    }
+}
+
+public class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Meow");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal[] animals = new Animal[3];
+        animals[0] = new Animal();
+        animals[1] = new Dog();
+        animals[2] = new Cat();
+
+        for (Animal animal : animals) {
+            animal.makeSound();
+        }
+    }
+}
+\end{verbatim}
+
+
+
+\section{Полиморфизм. Полиморфизм по методам. Переопределение методов}
+Полиморфизм по методам позволяет объектам разных классов быть обработанными через единый интерфейс. Это достигается с помощью переопределения методов в подклассах. Методовый полиморфизм позволяет вызывать переопределенные методы подклассов через ссылки суперкласса.
+
+\subsection*{Переопределение методов}
+Переопределение методов (method overriding) позволяет подклассу предоставить специфическую реализацию метода, который уже определен в суперклассе. Это полезно для изменения или расширения поведения метода в подклассе.
+
+
+\begin{verbatim}
+public class Animal {
+    public void makeSound() {
+        System.out.println("Some generic animal sound");
+    }
+}
+
+public class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Bark");
+    }
+}
+
+public class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Meow");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myDog = new Dog();
+        Animal myCat = new Cat();
+
+        myDog.makeSound(); // Вывод: Bark
+        myCat.makeSound(); // Вывод: Meow
+    }
+}
+\end{verbatim}
+
+
+\section{Абстрактные классы. Абстрактные метод}
+Абстрактный класс — это класс, который не может быть инстанцирован напрямую. Он может содержать как абстрактные методы (методы без реализации), так и конкретные методы (методы с реализацией). Абстрактные классы используются для определения общих характеристик и поведения, которые должны быть реализованы в подклассах.
+
+Абстрактный метод — это метод, который объявлен в абстрактном классе, но не имеет реализации. Абстрактные методы должны быть реализованы в подклассах.
+
+\begin{verbatim}
+    abstract class Animal {
+    // Абстрактный метод
+    public abstract void makeSound();
+
+    // Конкретный метод
+    public void sleep() {
+        System.out.println("This animal is sleeping.");
+    }
+}
+
+class Dog extends Animal {
+    // Реализация абстрактного метода
+    @Override
+    public void makeSound() {
+        System.out.println("Woof!");
+    }
+}
+
+class Cat extends Animal {
+    // Реализация абстрактного метода
+    @Override
+    public void makeSound() {
+        System.out.println("Meow!");
+    }
+}
+
+\end{verbatim}
+
+
+\section{Интерфейс. Интерфейсные ссылки. Стандартные интерфейсы}
+Интерфейс в Java — это ссылочный тип, подобный классу, который используется для определения набора методов, которые класс должен реализовать. Интерфейсы не могут содержать реализации методов (до Java 8), но могут содержать константы и методы по умолчанию (начиная с Java 8).
+
+\subsection*{Определение интерфейса}
+\begin{verbatim}
+public interface Animal {
+    void makeSound();
+    void sleep();
+}
+\end{verbatim}
+
+\subsection*{Реализация интерфейса}
+Класс, реализующий интерфейс, должен предоставить реализации всех методов, объявленных в интерфейсе.
+
+\begin{verbatim}
+public class Dog implements Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Woof!");
+    }
+
+    @Override
+    public void sleep() {
+        System.out.println("Dog is sleeping.");
+    }
+}
+\end{verbatim}
+
+\section*{Интерфейсные ссылки}
+Интерфейсные ссылки позволяют создавать переменные типа интерфейса, которые могут ссылаться на любой объект, реализующий этот интерфейс.
+
+\begin{verbatim}
+Animal myDog = new Dog();
+myDog.makeSound(); // Вывод: Woof!
+myDog.sleep();     // Вывод: Dog is sleeping.
+\end{verbatim}
+
+\section*{Стандартные интерфейсы}
+
+Java предоставляет множество стандартных интерфейсов, которые часто используются в разработке программного обеспечения. Некоторые из них включают:
+\begin{itemize}
+    \item \texttt{java.lang.Comparable}: используется для сравнения объектов.
+    \item \texttt{java.util.Iterator}: используется для итерации по коллекциям.
+    \item \texttt{java.util.List}: интерфейс для списков.
+    \item \texttt{java.util.Set}: интерфейс для множеств.
+    \item \texttt{java.util.Map}: интерфейс для отображений (ключ-значение).
+\end{itemize}
+
+
+\section{Исключения. Виды исключений. Объявление и выброс исключений}
+Исключения в Java используются для обработки ошибок и необычных ситуаций, которые могут возникнуть во время выполнения программы. 
+
+Исключения в Java делятся на две основные категории: проверяемые (checked) и непроверяемые (unchecked).
+
+\textbf{Проверяемые исключения }— это исключения, которые должны быть обработаны или объявлены в методе. Они наследуются от класса \texttt{Exception}.
+
+\begin{itemize}
+    \item \texttt{IOException}
+    \item \texttt{SQLException}
+    \item \texttt{FileNotFoundException}
+\end{itemize}
+
+\subsection*{Непроверяемые исключения (Unchecked Exceptions)}
+
+Непроверяемые исключения — это исключения, которые не обязательно обрабатывать или объявлять. Они наследуются от класса \texttt{RuntimeException}.
+
+\begin{itemize}
+    \item \texttt{NullPointerException}
+    \item \texttt{ArrayIndexOutOfBoundsException}
+    \item \texttt{ArithmeticException}
+\end{itemize}
+
+
+Метод может объявлять, что он выбрасывает исключения, используя ключевое слово \texttt{throws}.
+
+\begin{verbatim}
+public void readFile(String fileName) throws IOException {
+    // Код для чтения файла
+}
+\end{verbatim}
+
+Исключения могут быть выброшены с помощью ключевого слова \texttt{throw}.
+
+\begin{verbatim}
+public void checkAge(int age) {
+    if (age < 18) {
+        throw new IllegalArgumentException("Age must be 18 or older");
+    }
+}
+\end{verbatim}
+
+\subsection*{Создание пользовательских исключений}
+Пользовательские исключения могут быть созданы путем наследования от класса \texttt{Exception} или \texttt{RuntimeException}.
+
+\begin{verbatim}
+public class CustomException extends Exception {
+    public CustomException(String message) {
+        super(message);
+    }
+}
+
+public void customMethod() throws CustomException {
+    throw new CustomException("This is a custom exception");
+}
+\end{verbatim}
+
+
+\section{Исключения. Виды исключений. Перехват исключений}
+\subsection*{Проверяемые исключения (Checked Exceptions)}
+Проверяемые исключения должны быть обработаны или объявлены в методе.
+\begin{itemize}
+    \item \texttt{IOException} — базовый класс для исключений ввода-вывода.
+    \item \texttt{FileNotFoundException} — выбрасывается, когда файл не найден.
+    \item \texttt{SQLException} — выбрасывается при ошибках в работе с базой данных.
+    \item \texttt{ClassNotFoundException} — выбрасывается, когда класс не найден.
+    \item \texttt{InstantiationException} — выбрасывается, когда не удается создать экземпляр класса.
+    \item \texttt{InterruptedException} — выбрасывается, когда поток прерван.
+    \item \texttt{NoSuchMethodException} — выбрасывается, когда метод не найден.
+    \item \texttt{NoSuchFieldException} — выбрасывается, когда поле не найдено.
+    \item \texttt{MalformedURLException} — выбрасывается при некорректном URL.
+    \item \texttt{ParseException} — выбрасывается при ошибках парсинга.
+\end{itemize}
+
+\subsection*{Непроверяемые исключения (Unchecked Exceptions)}
+Непроверяемые исключения не обязательно обрабатывать или объявлять.
+\begin{itemize}
+    \item \texttt{NullPointerException} — выбрасывается при попытке доступа к объекту через null-ссылку.
+    \item \texttt{ArrayIndexOutOfBoundsException} — выбрасывается при попытке доступа к несуществующему индексу массива.
+    \item \texttt{ArithmeticException} — выбрасывается при арифметических ошибках, таких как деление на ноль.
+    \item \texttt{IllegalArgumentException} — выбрасывается при передаче недопустимого аргумента методу.
+    \item \texttt{IllegalStateException} — выбрасывается, когда метод вызывается в недопустимом состоянии.
+    \item \texttt{IndexOutOfBoundsException} — базовый класс для исключений, связанных с индексами.
+    \item \texttt{NumberFormatException} — выбрасывается при некорректном преобразовании строки в число.
+    \item \texttt{UnsupportedOperationException} — выбрасывается, когда метод не поддерживается.
+    \item \texttt{ClassCastException} — выбрасывается при некорректном приведении типов.
+    \item \texttt{ConcurrentModificationException} — выбрасывается при изменении коллекции во время итерации.
+\end{itemize}
+Исключения могут быть обработаны с помощью блока \texttt{try-catch}.
+
+\begin{verbatim}
+public void readFile(String fileName) {
+    try {
+        // Код для чтения файла
+    } catch (IOException e) {
+        System.out.println("An error occurred: " + e.getMessage());
+    }
+}
+\end{verbatim}
+
+
+\section{Обобщения. Обобщенный класс. Обобщенный метод}
+Обобщения в Java позволяют создавать классы, интерфейсы и методы, которые работают с любыми типами данных, обеспечивая при этом типовую безопасность и устраняя необходимость в приведении типов.
+
+Обобщенный класс позволяет использовать параметры типа для определения типов данных, с которыми класс будет работать.
+
+\subsection*{Пример обобщенного класса}
+
+\begin{verbatim}
+public class Box<T> {
+    private T content;
+
+    public void setContent(T content) {
+        this.content = content;
+    }
+
+    public T getContent() {
+        return content;
+    }
+}
+\end{verbatim}
+
+\subsection*{Обобщенный метод}
+Обобщенный метод позволяет использовать параметры типа для определения типов данных, с которыми метод будет работать.
+
+\begin{verbatim}
+public class Util {
+    public static <T> void printArray(T[] array) {
+        for (T element : array) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+    }
+}
+\end{verbatim}
+
+\subsection*{Обобщенные интерфейсы}
+Обобщённые интерфейсы позволяют использовать параметры типа для определения типов данных, с которыми интерфейс будет работать.
+
+\begin{verbatim}
+public interface Pair<K, V> {
+    void setKey(K key);
+    K getKey();
+    void setValue(V value);
+    V getValue();
+}
+
+public class OrderedPair<K, V> implements Pair<K, V> {
+    private K key;
+    private V value;
+
+    @Override
+    public void setKey(K key) {
+        this.key = key;
+    }
+
+    @Override
+    public K getKey() {
+        return key;
+    }
+
+    @Override
+    public void setValue(V value) {
+        this.value = value;
+    }
+
+    @Override
+    public V getValue() {
+        return value;
+    }
+}
+\end{verbatim}
+
+
+\section{Класс ArrayList. Описание, основные методы. Примеры использования}
+Класс \texttt{ArrayList} в Java является частью Java Collections Framework и реализует интерфейс \texttt{List}. Он представляет собой динамический массив, который может изменять свой размер по мере добавления или удаления элементов. \texttt{ArrayList} позволяет хранить дубликаты и поддерживает доступ к элементам по индексу.
+
+\subsection*{Основные методы}
+\begin{itemize}
+    \item \texttt{add(E e)}: Добавляет элемент в конец списка.
+    \item \texttt{get(int index)}: Возвращает элемент по указанному индексу.
+    \item \texttt{set(int index, E element)}: Заменяет элемент по указанному индексу новым элементом.
+    \item \texttt{remove(int index)}: Удаляет элемент по указанному индексу.
+    \item \texttt{size()}: Возвращает количество элементов в списке.
+    \item \texttt{isEmpty()}: Проверяет, пуст ли список.
+    \item \texttt{contains(Object o)}: Проверяет, содержится ли указанный элемент в списке.
+\end{itemize}
+
+\subsection*{Примеры использования}
+
+\subsubsection*{Создание и добавление элементов}
+\begin{verbatim}
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+
+        System.out.println(list); // Вывод: [Apple, Banana, Cherry]
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Доступ к элементам}
+\begin{verbatim}
+public class ArrayListExample {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+
+        String firstElement = list.get(0);
+        System.out.println(firstElement); // Вывод: Apple
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Удаление элементов}
+\begin{verbatim}
+public class ArrayListExample {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+
+        list.remove(1);
+        System.out.println(list); // Вывод: [Apple, Cherry]
+    }
+}
+\end{verbatim}
+
+
+\section{Класс HashMap. Описание, основные методы. Примеры использования}
+Класс \texttt{HashMap} в Java является частью Java Collections Framework и реализует интерфейс \texttt{Map}. Он представляет собой структуру данных, которая хранит пары "ключ-значение". \texttt{HashMap} не гарантирует порядок элементов и допускает наличие одного \texttt{null} ключа и множества \texttt{null} значений.
+
+\subsection*{Основные методы}
+\begin{itemize}
+    \item \texttt{put(K key, V value)}: Добавляет пару "ключ-значение" в карту.
+    \item \texttt{get(Object key)}: Возвращает значение, связанное с указанным ключом.
+    \item \texttt{remove(Object key)}: Удаляет пару "ключ-значение" по указанному ключу.
+    \item \texttt{containsKey(Object key)}: Проверяет, содержится ли указанный ключ в карте.
+    \item \texttt{containsValue(Object value)}: Проверяет, содержится ли указанное значение в карте.
+    \item \texttt{size()}: Возвращает количество элементов в карте.
+    \item \texttt{isEmpty()}: Проверяет, пуста ли карта.
+    \item \texttt{keySet()}: Возвращает набор всех ключей в карте.
+    \item \texttt{values()}: Возвращает коллекцию всех значений в карте.
+    \item \texttt{entrySet()}: Возвращает набор всех пар "ключ-значение" в карте.
+\end{itemize}
+
+\subsubsection*{Создание и добавление элементов}
+\begin{verbatim}
+import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("Apple", 1);
+        map.put("Banana", 2);
+        map.put("Cherry", 3);
+
+        System.out.println(map); // Вывод: {Apple=1, Banana=2, Cherry=3}
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Доступ к элементам}
+\begin{verbatim}
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("Apple", 1);
+        map.put("Banana", 2);
+        map.put("Cherry", 3);
+
+        int value = map.get("Banana");
+        System.out.println(value); // Вывод: 2
+    }
+}
+\end{verbatim}
+
+
+\section{Stream API. Описание. Возможности. Примеры использования}
+Stream API была введена в Java 8 и предоставляет мощный способ обработки последовательностей элементов. Stream API позволяет выполнять операции над коллекциями данных в функциональном стиле, что делает код более читаемым и лаконичным. Stream API поддерживает как последовательную, так и параллельную обработку данных.
+
+\subsection*{Возможности}
+\begin{itemize}
+    \item \textbf{Фильтрация}: Отбор элементов, удовлетворяющих определенному условию.
+    \item \textbf{Преобразование}: Применение функции к каждому элементу потока.
+    \item \textbf{Сортировка}: Упорядочивание элементов потока.
+    \item \textbf{Агрегация}: Сведение элементов потока к одному значению (например, сумма, среднее значение).
+    \item \textbf{Параллельная обработка}: Выполнение операций над потоком в нескольких потоках для улучшения производительности.
+\end{itemize}
+
+\subsection*{Примеры использования}
+
+\subsubsection*{Фильтрация и преобразование}
+\begin{verbatim}
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamAPIExample {
+    public static void main(String[] args) {
+        List<String> words = Arrays.asList("apple", "banana", "cherry", "date");
+
+        List<String> filteredWords = words.stream()
+            .filter(word -> word.startsWith("b"))
+            .map(String::toUpperCase)
+            .collect(Collectors.toList());
+
+        System.out.println(filteredWords); // Вывод: [BANANA]
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Сортировка}
+\begin{verbatim}
+public class StreamAPIExample {
+    public static void main(String[] args) {
+        List<String> words = Arrays.asList("apple", "banana", "cherry", "date");
+
+        List<String> sortedWords = words.stream()
+            .sorted()
+            .collect(Collectors.toList());
+
+        System.out.println(sortedWords); // Вывод: [apple, banana, cherry, date]
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Агрегация}
+\begin{verbatim}
+import java.util.Arrays;
+import java.util.List;
+
+public class StreamAPIExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        int sum = numbers.stream()
+            .reduce(0, Integer::sum);
+
+        System.out.println(sum); // Вывод: 15
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Параллельная обработка}
+\begin{verbatim}
+public class StreamAPIExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        int sum = numbers.parallelStream()
+            .reduce(0, Integer::sum);
+
+        System.out.println(sum); // Вывод: 15
+    }
+}
+\end{verbatim}
+
+
+\section{Ключевое слово final. Применение в различных контекстах}
+\subsubsection*{Final переменные}
+Переменные, объявленные как \texttt{final}, не могут быть изменены после их инициализации.
+\begin{verbatim}
+public class FinalVariableExample {
+    public static void main(String[] args) {
+        final int CONSTANT = 10;
+        // CONSTANT = 20; // Ошибка: нельзя изменить значение final переменной
+        System.out.println(CONSTANT); // Вывод: 10
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Final методы}
+Методы, объявленные как \texttt{final}, не могут быть переопределены в подклассах.
+
+\begin{verbatim}
+class Parent {
+    final void display() {
+        System.out.println("Display method in Parent class");
+    }
+}
+
+class Child extends Parent {
+    // void display() { // Ошибка: нельзя переопределить final метод
+    //     System.out.println("Display method in Child class");
+    // }
+}
+\end{verbatim}
+
+\subsubsection*{Final классы}
+Классы, объявленные как \texttt{final}, не могут быть унаследованы.
+
+\begin{verbatim}
+final class FinalClass {
+    void display() {
+        System.out.println("Display method in FinalClass");
+    }
+}
+
+// class SubClass extends FinalClass { // Ошибка: нельзя наследовать final класс
+// }
+\end{verbatim}
+
+\subsubsection*{Final параметры}
+Параметры методов, объявленные как \texttt{final}, не могут быть изменены внутри метода.
+
+\begin{verbatim}
+public class FinalParameterExample {
+    void display(final int value) {
+        // value = 20; // Ошибка: нельзя изменить значение final параметра
+        System.out.println(value); // Вывод: 10
+    }
+
+    public static void main(String[] args) {
+        FinalParameterExample example = new FinalParameterExample();
+        example.display(10);
+    }
+}
+\end{verbatim}
+
+
+\section{Особенности сравнения примитивных типов данных и объектов}
+\textbf{Примитивные типы данных} в Java (например, \texttt{int}, \texttt{double}, \texttt{char}) хранят свои значения непосредственно в стеке. Сравнение примитивных типов данных выполняется с использованием операторов \texttt{==}, \texttt{!=}, \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}.
+
+\textbf{Объекты} в Java хранят ссылки на данные в куче. Сравнение объектов с использованием операторов \texttt{==} и \texttt{!=} проверяет равенство ссылок, а не содержимого объектов. Для сравнения содержимого объектов используется метод \texttt{equals}.
+
+\subsubsection*{Сравнение ссылок}
+\begin{verbatim}
+public class ObjectComparisonExample {
+    public static void main(String[] args) {
+        String str1 = new String("Hello");
+        String str2 = new String("Hello");
+
+        System.out.println(str1 == str2); // Вывод: false (разные ссылки)
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Сравнение содержимого}
+\begin{verbatim}
+public class ObjectComparisonExample {
+    public static void main(String[] args) {
+        String str1 = new String("Hello");
+        String str2 = new String("Hello");
+
+        System.out.println(str1.equals(str2)); // Вывод: true (одинаковое содержимое)
+    }
+}
+\end{verbatim}
+
+\subsection*{Переопределение метода equals}
+Для корректного сравнения содержимого объектов необходимо переопределить метод \texttt{equals} в классе.
+
+\begin{verbatim}
+class Person {
+    String name;
+    int age;
+
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Person person = (Person) obj;
+        return age == person.age && name.equals(person.name);
+    }
+}
+
+public class EqualsOverrideExample {
+    public static void main(String[] args) {
+        Person person1 = new Person("Alice", 30);
+        Person person2 = new Person("Alice", 30);
+
+        System.out.println(person1.equals(person2)); // Вывод: true
+    }
+}
+\end{verbatim}
+
+
+\section{Сравнительная характеристика статических и нестатических методов}
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Статические методы} & \textbf{Нестатические методы} \\
+\hline
+Принадлежат классу, а не экземпляру класса. & Принадлежат экземпляру класса. \\
+\hline
+Могут быть вызваны без создания экземпляра класса. & Требуют создания экземпляра класса для вызова. \\
+\hline
+Не могут напрямую обращаться к нестатическим полям или методам. & Могут обращаться к статическим и нестатическим полям и методам. \\
+\hline
+Используются для выполнения задач, которые не зависят от состояния объекта. & Используются для выполнения задач, которые зависят от состояния объекта. \\
+\hline
+
+\end{tabular}
+
+
+\section{Сравнительная характеристика массивов и ArrayList}
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Массивы} & \textbf{ArrayList} \\
+\hline
+Фиксированный размер, определяется при создании. & Динамический размер, может изменяться по мере добавления или удаления элементов. \\
+\hline
+Тип элементов должен быть указан при создании. & Может хранить элементы любого типа, включая \texttt{null}. \\
+\hline
+Доступ к элементам по индексу. & Доступ к элементам по индексу. \\
+\hline
+Не предоставляет встроенных методов для добавления или удаления элементов. & Предоставляет встроенные методы для добавления (\texttt{add}), удаления (\texttt{remove}) и других операций. \\
+\hline
+Быстрее в доступе к элементам по индексу. & Медленнее в доступе к элементам по индексу из-за дополнительных проверок и методов. \\
+\hline
+Не является частью Java Collections Framework. & Является частью Java Collections Framework и реализует интерфейс \texttt{List}. \\
+\hline
+Пример: \texttt{int[] array = new int[10];} & Пример: \texttt{ArrayList<Integer> list = new ArrayList<>();} \\
+\hline
+\end{tabular}
+
+
+
+\section{Сравнительная характеристика примитивных и ссылочных типов данных. Особенности передачи параметров в методах}
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{Примитивные типы данных} & \textbf{Ссылочные типы данных} \\
+\hline
+Хранят значения непосредственно в стеке. & Хранят ссылки на объекты в куче. \\
+\hline
+Примеры: \texttt{int}, \texttt{double}, \texttt{char}, \texttt{boolean}. & Примеры: \texttt{String}, \texttt{ArrayList}, \texttt{Integer}, \texttt{Object}. \\
+\hline
+Имеют фиксированный размер. & Размер может варьироваться в зависимости от содержимого объекта. \\
+\hline
+Быстрее в доступе и операциях. & Медленнее в доступе и операциях из-за необходимости работы с кучей. \\
+\hline
+Не могут быть \texttt{null}. & Могут быть \texttt{null}. \\
+\hline
+Передача параметров в методы по значению. & Передача параметров в методы по ссылке. \\
+\hline
+\end{tabular}
+
+\subsection*{Особенности передачи параметров в методах}
+
+\subsubsection*{Передача примитивных типов}
+Примитивные типы данных передаются в методы по значению. Это означает, что \textbf{копия} значения передается в метод, и изменения внутри метода не влияют на оригинальное значение.
+
+\subsubsection*{Передача ссылочных типов}
+Ссылочные типы данных передаются в методы по ссылке. Это означает, что передается копия ссылки на объект, и изменения внутри метода могут влиять на оригинальный объект, если изменяются его поля или состояние.
+
+\subsubsection*{Передача неизменяемых объектов}
+Некоторые ссылочные типы, такие как \texttt{String}, являются неизменяемыми. Это означает, что их содержимое не может быть изменено после создания. Передача таких объектов в методы также происходит по ссылке, но изменения внутри метода не влияют на оригинальный объект.
+
+
+\section{Классификация циклов. Ключевые слова для перехода на следующую итерацию и досрочное завершение цикла}
+Цикл \texttt{for} используется для выполнения блока кода определенное количество раз. Он состоит из трех частей: инициализации, условия и обновления.
+\begin{verbatim}
+for (int i = 0; i < 10; i++) {
+    System.out.println(i);
+}
+\end{verbatim}
+
+Цикл \texttt{while} выполняет блок кода до тех пор, пока условие истинно. Условие проверяется перед каждой итерацией.
+\begin{verbatim}
+int i = 0;
+while (i < 10) {
+    System.out.println(i);
+    i++;
+}
+\end{verbatim}
+
+Цикл \texttt{do-while} аналогичен циклу \texttt{while}, но условие проверяется после выполнения блока кода, что гарантирует выполнение блока кода хотя бы один раз.
+
+\begin{verbatim}
+int i = 0;
+do {
+    System.out.println(i);
+    i++;
+} while (i < 10);
+\end{verbatim}
+
+Цикл \texttt{for-each} используется для итерации по элементам массива или коллекции. Он не требует явного управления индексом.
+\begin{verbatim}
+int[] numbers = {1, 2, 3, 4, 5};
+for (int number : numbers) {
+    System.out.println(number);
+}
+\end{verbatim}
+
+\subsection*{Ключевые слова для управления циклами}
+
+\subsubsection*{\texttt{break}}
+\begin{verbatim}
+for (int i = 0; i < 10; i++) {
+    if (i == 5) {
+        break;
+    }
+    System.out.println(i);
+}
+\end{verbatim}
+
+\subsubsection*{\texttt{continue}}
+\begin{verbatim}
+for (int i = 0; i < 10; i++) {
+    if (i == 5) {
+        continue;
+    }
+    System.out.println(i);
+}
+\end{verbatim}
+
+
+\section{Функциональные интерфейсы. Лямбда-функции. Варианты объявлений}
+Функциональный интерфейс в Java — это интерфейс, который содержит \textbf{ровно один абстрактный метод}. Функциональные интерфейсы могут иметь множество методов по умолчанию или статических методов, но только один абстрактный метод. Они используются как основа для лямбда-выражений и методов ссылок.
+
+\begin{verbatim}
+@FunctionalInterface
+interface MyFunctionalInterface {
+    void myMethod();
+}
+\end{verbatim}
+
+\subsection*{Лямбда-функции}
+Лямбда-функции (или лямбда-выражения) позволяют передавать функциональность в виде аргументов методов или хранить их в переменных. Лямбда-выражения предоставляют способ определения анонимных функций прямо в месте их использования.
+
+\subsubsection*{Синтаксис лямбда-выражений}
+Лямбда-выражения имеют следующий синтаксис:
+
+\begin{verbatim}
+(parameters) -> expression
+\end{verbatim}
+
+или
+
+\begin{verbatim}
+(parameters) -> { statements; }
+\end{verbatim}
+
+\subsubsection*{Примеры лямбда-выражений}
+
+\paragraph{Без параметров}
+\begin{verbatim}
+MyFunctionalInterface func = () -> System.out.println("Hello, World!");
+func.myMethod(); // Вывод: Hello, World!
+\end{verbatim}
+
+\paragraph{С одним параметром}
+\begin{verbatim}
+@FunctionalInterface
+interface StringProcessor {
+    String process(String str);
+}
+
+StringProcessor processor = (str) -> str.toUpperCase();
+System.out.println(processor.process("hello")); // Вывод: HELLO
+\end{verbatim}
+
+\paragraph{С несколькими параметрами}
+\begin{verbatim}
+@FunctionalInterface
+interface MathOperation {
+    int operate(int a, int b);
+}
+
+MathOperation addition = (a, b) -> a + b;
+System.out.println(addition.operate(5, 3)); // Вывод: 8
+\end{verbatim}
+
+\paragraph{С блоком кода}
+\begin{verbatim}
+MathOperation multiplication = (a, b) -> {
+    int result = a * b;
+    return result;
+};
+System.out.println(multiplication.operate(5, 3)); // Вывод: 15
+\end{verbatim}
+
+\subsection*{Варианты объявлений}
+
+\subsubsection*{Анонимный класс}
+\begin{verbatim}
+MyFunctionalInterface func = new MyFunctionalInterface() {
+    @Override
+    public void myMethod() {
+        System.out.println("Hello, World!");
+    }
+};
+func.myMethod(); // Вывод: Hello, World!
+\end{verbatim}
+
+\subsubsection*{Лямбда-выражение}
+\begin{verbatim}
+MyFunctionalInterface func = () -> System.out.println("Hello, World!");
+func.myMethod(); // Вывод: Hello, World!
+\end{verbatim}
+
+\subsubsection*{Метод ссылки}
+Метод ссылки позволяет ссылаться на существующий метод или конструктор.
+
+\begin{verbatim}
+@FunctionalInterface
+interface Printer {
+    void print(String message);
+}
+
+Printer printer = System.out::println;
+printer.print("Hello, World!"); // Вывод: Hello, World!
+\end{verbatim}
+
+
+
+\section{Функциональные интерфейсы. Лямбда-функции. Стандартные функциональные интерфейсы}
+\subsection*{\texttt{Predicate<T>}}
+Интерфейс \texttt{Predicate<T>} представляет предикат (условие) с одним аргументом.
+
+\begin{verbatim}
+import java.util.function.Predicate;
+
+Predicate<String> isEmpty = String::isEmpty;
+System.out.println(isEmpty.test("")); // Вывод: true
+System.out.println(isEmpty.test("Hello")); // Вывод: false
+\end{verbatim}
+
+\subsection*{\texttt{Function<T, R>}}
+Интерфейс \texttt{Function<T, R>} представляет функцию, которая принимает один аргумент и возвращает результат.
+
+\begin{verbatim}
+import java.util.function.Function;
+
+Function<String, Integer> length = String::length;
+System.out.println(length.apply("Hello")); // Вывод: 5
+\end{verbatim}
+
+\subsection*{\texttt{Consumer<T>}}
+Интерфейс \texttt{Consumer<T>} представляет операцию, которая принимает один аргумент и не возвращает результата.
+
+\begin{verbatim}
+import java.util.function.Consumer;
+
+Consumer<String> printer = System.out::println;
+printer.accept("Hello, World!"); // Вывод: Hello, World!
+\end{verbatim}
+
+\subsection*{\texttt{Supplier<T>}}
+Интерфейс \texttt{Supplier<T>} представляет поставщика результатов без аргументов.
+
+\begin{verbatim}
+import java.util.function.Supplier;
+
+Supplier<String> greeting = () -> "Hello, World!";
+System.out.println(greeting.get()); // Вывод: Hello, World!
+\end{verbatim}
+
+\subsection*{\texttt{BinaryOperator<T>}}
+Интерфейс \texttt{BinaryOperator<T>} представляет операцию над двумя аргументами одного типа, возвращающую результат того же типа.
+
+\begin{verbatim}
+import java.util.function.BinaryOperator;
+
+BinaryOperator<Integer> multiply = (a, b) -> a * b;
+System.out.println(multiply.apply(3, 4)); // Вывод: 12
+\end{verbatim}
+
+\subsection*{\texttt{UnaryOperator<T>}}
+Интерфейс \texttt{UnaryOperator<T>} представляет операцию над одним аргументом одного типа, возвращающую результат того же типа.
+
+\begin{verbatim}
+import java.util.function.UnaryOperator;
+
+UnaryOperator<Integer> square = x -> x * x;
+System.out.println(square.apply(4)); // Вывод: 16
+\end{verbatim}
+
+\subsection*{\texttt{BiFunction<T, U, R>}}
+Интерфейс \texttt{BiFunction<T, U, R>} представляет функцию, которая принимает два аргумента и возвращает результат.
+
+\begin{verbatim}
+import java.util.function.BiFunction;
+
+BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
+System.out.println(add.apply(2, 3)); // Вывод: 5
+\end{verbatim}
+
+\subsection*{\texttt{BiConsumer<T, U>}}
+Интерфейс \texttt{BiConsumer<T, U>} представляет операцию, которая принимает два аргумента и не возвращает результата.
+
+\begin{verbatim}
+import java.util.function.BiConsumer;
+
+BiConsumer<String, String> concat = (a, b) -> System.out.println(a + b);
+concat.accept("Hello, ", "World!"); // Вывод: Hello, World!
+\end{verbatim}
+
+\subsection*{\texttt{BiPredicate<T, U>}}
+Интерфейс \texttt{BiPredicate<T, U>} представляет предикат (условие) с двумя аргументами.
+
+\begin{verbatim}
+import java.util.function.BiPredicate;
+
+BiPredicate<String, String> equals = String::equals;
+System.out.println(equals.test("Hello", "Hello")); // Вывод: true
+System.out.println(equals.test("Hello", "World")); // Вывод: false
+\end{verbatim}
+
+
+\section{План реализации собственного исключения}
+
+\subsection*{Определение класса исключения}
+Создайте новый класс, который наследует \texttt{Exception} или один из его подклассов. Обычно собственные исключения наследуют \texttt{Exception} для проверяемых исключений или \texttt{RuntimeException} для непроверяемых исключений.
+
+\begin{verbatim}
+public class MyCustomException extends Exception {
+    public MyCustomException(String message) {
+        super(message);
+    }
+
+    public MyCustomException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+\end{verbatim}
+
+\subsection*{Конструкторы}
+Определите конструкторы для вашего исключения. Обычно это включает конструктор с сообщением об ошибке и конструктор с сообщением и причиной.
+
+\begin{verbatim}
+public class MyCustomException extends Exception {
+    public MyCustomException(String message) {
+        super(message);
+    }
+
+    public MyCustomException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+\end{verbatim}
+
+\subsection*{Дополнительные поля и методы}
+Если необходимо, добавьте дополнительные поля и методы для хранения информации, специфичной для вашего исключения.
+
+\begin{verbatim}
+public class MyCustomException extends Exception {
+    private final int errorCode;
+
+    public MyCustomException(String message, int errorCode) {
+        super(message);
+        this.errorCode = errorCode;
+    }
+
+    public MyCustomException(String message, Throwable cause, int errorCode) {
+        super(message, cause);
+        this.errorCode = errorCode;
+    }
+
+    public int getErrorCode() {
+        return errorCode;
+    }
+}
+\end{verbatim}
+
+\subsection*{Генерация исключения}
+Создайте условия, при которых будет генерироваться ваше исключение, и используйте ключевое слово \texttt{throw} для его выброса.
+
+\begin{verbatim}
+public class Example {
+    public void performOperation(int value) throws MyCustomException {
+        if (value < 0) {
+            throw new MyCustomException("Value cannot be negative", 1001);
+        }
+        // Другие операции
+    }
+}
+\end{verbatim}
+
+\subsection*{Обработка исключения}
+Используйте блок \texttt{try-catch} для обработки вашего исключения.
+
+\begin{verbatim}
+public class Main {
+    public static void main(String[] args) {
+        Example example = new Example();
+        try {
+            example.performOperation(-1);
+        } catch (MyCustomException e) {
+            System.out.println("Caught exception: " + e.getMessage());
+            System.out.println("Error code: " + e.getErrorCode());
+        }
+    }
+}
+\end{verbatim}
+
+\end{document}
